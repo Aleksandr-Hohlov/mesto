@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./page/index.css">
+  <link rel="icon" href="./images/favicon.jpg" type="image/x-icon">
+  <title>Mesto</title>
+</head>
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="./images/logo.svg" alt="Лого">
+      <div class="header__line"></div>
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <div class="profile__two-column">
+          <img class="profile__avatar" src="./images/profile__avatar.png" alt="Аватар">
+          <div class="profile__info">
+            <div class="profile__edit-name">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <img class="profile__edit-button" src="./images/edit.svg" alt="редактировать">
+            </div>
+            <p class="profile__subtitle">Исследователь океана</p>
+          </div>
+        </div>
+        <img class="profile__add-button" src="./images/add.svg" alt="редактировать">
+      </section>
+
+      <section class="elements">
+
+        <article class="element">
+          <img class="element__image" src="./images/dombay.jpg" alt="фото">
+          <div class="element__caption">
+            <p class="element__name">Домбай</p>
+            <img class="element__like" src="./images/like.svg" alt="лайк">
+          </div>
+        </article>
+
+        <article class="element">
+          <img class="element__image" src="./images/elbrus.jpg" alt="фото">
+          <div class="element__caption">
+            <p class="element__name">Гора Эльбрус</p>
+            <img class="element__like" src="./images/like.svg" alt="лайк">
+          </div>
+        </article>
+
+        <article class="element">
+          <img class="element__image" src="./images/karachaevsk.jpg" alt="фото">
+          <div class="element__caption">
+            <p class="element__name">Карачаево-Черкесия</p>
+            <img class="element__like" src="./images/like.svg" alt="лайк">
+          </div>
+        </article>
+
+        <article class="element">
+          <img class="element__image" src="./images/photo-lake.jpg" alt="фото">
+          <div class="element__caption">
+            <p class="element__name">Озеро Кардывач</p>
+            <img class="element__like" src="./images/like.svg" alt="лайк">
+          </div>
+        </article>
+
+        <article class="element">
+          <img class="element__image" src="./images/photo_Karelia.jpg" alt="фото">
+          <div class="element__caption">
+            <p class="element__name">Карелия</p>
+            <img class="element__like" src="./images/like.svg" alt="лайк">
+          </div>
+        </article>
+
+        <article class="element">
+          <img class="element__image" src="./images/photo_Oshten.jpg" alt="фото">
+          <div class="element__caption">
+            <p class="element__name">Гора Оштен</p>
+            <img class="element__like" src="./images/like.svg" alt="лайк">
+          </div>
+        </article>
+
+
+      </section>
+    </main>
+
+    <footer class="footer">
+    </footer>
+
+    <section class="popup">
+      <form class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <label><input class="popup__input popup__input_name" type="text" value="Жак-Ив Кусто"></label>
+        <label><input class="popup__input popup__input_job" type="text" value="Исследователь океана"></label>
+        <span class="popup__close-button" href="#"></span>
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </section>
+    <footer class="footer">
+      <p class="footer__description">&#169; 2022 Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./script/index.js"></script>
+</body>
+</html>
