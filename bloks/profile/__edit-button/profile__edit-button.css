@@ -6,6 +6,8 @@
   transition: 0.3s;
   cursor: pointer;
   align-self: center;
+  margin-right: 18px;
+  margin-left: 18px;
 }
 
 .profile__edit-button:hover {

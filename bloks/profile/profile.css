@@ -1,13 +1,15 @@
 .profile {
   margin: 36px auto 47px;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: min-content;
   flex-wrap: wrap;
   color: #FFFFFF;
-  justify-content: space-between;
 }
 
 @media screen and (max-width: 670px) {
   .profile {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
