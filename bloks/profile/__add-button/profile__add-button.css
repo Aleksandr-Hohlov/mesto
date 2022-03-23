@@ -5,6 +5,7 @@
   height: 22px;
   transition: 0.3s;
   cursor: pointer;
+  border-radius: 2px;
 }
 
 .profile__add-button:hover {
