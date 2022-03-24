@@ -7,7 +7,7 @@ const nameInput = document.querySelector('.popup__input_name');
 const jobInput = document.querySelector('.popup__input_job');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
-const likeButton = document.querySelectorAll('img.element__like');
+const likeButton = document.querySelectorAll('.element__like');
 
 
 /*функция Открытие попап на кнопку редактирования*/
