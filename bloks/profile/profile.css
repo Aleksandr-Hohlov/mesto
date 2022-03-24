@@ -5,6 +5,7 @@
   grid-template-columns: min-content;
   flex-wrap: wrap;
   color: #FFFFFF;
+  align-items: center;
 }
 
 @media screen and (max-width: 670px) {
@@ -12,7 +13,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     margin-bottom: 36px;
   }
 }
