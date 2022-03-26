@@ -1,7 +1,7 @@
-
-# [Проект: Место](https://aleksandr-hohlov.github.io/mesto/)
-**Проектная работа №3.**
-
+![Ссылка на проект Mesto](./images/logo.svg)
+___
+## **[Проект: Место](https://aleksandr-hohlov.github.io/mesto/)**
+### Проектная работа №3.
 
 **Описание проекта:**
 
@@ -15,6 +15,15 @@
 * проект создан по макету Figma;
 
 
-**[Ссылка на проект Mesto]**(https://aleksandr-hohlov.github.io/mesto/)
-***[Ссылка на проект Mesto]***(https://aleksandr-hohlov.github.io/mesto/)
-*[Ссылка на проект Mesto]*(https://aleksandr-hohlov.github.io/mesto/)
+***[Ссылка на проект Mesto](https://aleksandr-hohlov.github.io/mesto/)***
+
+
+
+
+
+
+dsfsdfsdf
+
+
+
+
