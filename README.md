@@ -15,7 +15,10 @@
 * проект создан по макету Figma;
 
 
-* [Ссылка на проект Mesto](https://aleksandr-hohlov.github.io/mesto/)
-* [Ссылка на проект Mesto](./images/logo.svg)
+[Ссылка на проект Mesto](https://aleksandr-hohlov.github.io/mesto/)
+[](./images/logo.svg)
+![](./images/logo.svg)
+[1](./images/logo.svg)
+![1](./images/logo.svg)
 
 
