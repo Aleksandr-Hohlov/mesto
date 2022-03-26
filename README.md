@@ -1,4 +1,4 @@
-![Ссылка на проект Mesto](/images/logo.svg)
+![Ссылка на проект Mesto](./images/logo.svg)
 
 ## **[Проект: Место](https://aleksandr-hohlov.github.io/mesto/)**
 ### Проектная работа №3.
@@ -18,15 +18,6 @@
 ****
 ***[Ссылка на проект Mesto](https://aleksandr-hohlov.github.io/mesto/)***
 ****
--
---
----
-----
--
-
-
-
-dsfsdfsdf
 
 
 
