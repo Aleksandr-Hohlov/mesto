@@ -13,6 +13,8 @@ const jobProfile = document.querySelector('.profile__subtitle');
 /*функция Открытие попап на кнопку редактирования*/
 function ProfileEdit () {
   popup.classList.add(popupOpened);
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
   /*document.body.style.overflow = 'hidden';*/
 }
 
