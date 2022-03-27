@@ -15,13 +15,13 @@ function ProfileEdit () {
   popup.classList.add(popupOpened);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  /*document.body.style.overflow = 'hidden';*/
+  document.body.style.overflow = 'hidden';
 }
 
 /*функция Закрытие на крестик*/
 function popupClose () {
   popup.classList.remove(popupOpened);
-  /*document.body.style.overflow = '';*/
+  document.body.style.overflow = '';
 }
 
 /*функция Сохранение изменений*/
@@ -32,12 +32,12 @@ function formSubmitHandler (event) {
   popupClose();
 }
 
-/*функция лайк
+/*функция лайк*/
 for (var i = 0; i < likeButton.length; i++) {
   likeButton[i].onclick = function(e) {
     e.target.classList.toggle('element__like_active');
   }
-}*/
+}
 
 /*слушатели*/
 buttonProfileEdit.addEventListener('click', ProfileEdit);
