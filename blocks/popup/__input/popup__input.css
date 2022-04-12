@@ -11,6 +11,11 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.popup__input:invalid {
+  color: rgba(255, 0, 0, 0.6)
+}
+
+
 @media screen and (max-width: 670px) {
   .popup__input {
     max-width: 238px;

@@ -27,75 +27,50 @@
         <button class="profile__add-button" type="button"></button>
       </section>
 
-      <section class="elements">
-        <article class="element">
-          <img class="element__image" src="./images/dombay.jpg" alt="фото">
-          <div class="element__caption">
-            <h2 class="element__name">Домбай</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/elbrus.jpg" alt="фото">
-          <div class="element__caption">
-            <h2 class="element__name">Гора Эльбрус</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/karachaevsk.jpg" alt="фото">
-          <div class="element__caption">
-            <h2 class="element__name">Карачаево-Черкесия</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/photo-lake.jpg" alt="фото">
-          <div class="element__caption">
-            <h2 class="element__name">Озеро Кардывач</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/photo_Karelia.jpg" alt="фото">
-          <div class="element__caption">
-            <h2 class="element__name">Карелия</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </article>
-
-        <article class="element">
-          <img class="element__image" src="./images/photo_Oshten.jpg" alt="фото">
-          <div class="element__caption">
-            <h2 class="element__name">Гора Оштен</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </article>
-
-      </section>
+      <section class="elements"></section>
     </main>
 
     <footer class="footer">
       <p class="footer__description">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup__edit-profile">
       <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
+        <button class="popup__close-button popup__close-button_edit-profile" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="popup__form_submit">
-          <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто" name="popup__input_name">
-          <input class="popup__input popup__input_type_job" type="text" value="Исследователь океана" name="popup__input_job">
-          <button class="popup__save-button" type="submit">Сохранить</button>
+          <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто" name="popup__input_name" minlength="3" required>
+          <input class="popup__input popup__input_type_job" type="text" value="Исследователь океана" name="popup__input_job" minlength="3" required>
+          <button class="popup__save-button popup__save-button_edit-profile" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup__new-place">
+      <div class="popup__container">
+        <button class="popup__close-button popup__close-button_new-place" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popup__form_new-place">
+          <input class="popup__input popup__input_type_name-place" type="text" placeholder="Название" name="popup__input_name-place" minlength="3" required>
+          <input class="popup__input popup__input_type_link-place" type="url" placeholder="Ссылка на картинку" name="popup__input_link-place" required>
+          <button class="popup__save-button popup__save-button_new-place" type="submit">Создать</button>
         </form>
       </div>
     </div>
 
   </div>
-  <script src="./scripts/index.js"></script>
+
+  <script src="./scripts/index.js" defer></script>
+
+  <template id="card-template">
+    <article class="element">
+      <button class="element__delete" type="button"></button>
+      <img class="element__image" alt="фото">
+      <div class="element__caption">
+        <h2 class="element__name"></h2>
+        <button class="element__like" type="button"></button>
+      </div>
+    </article>
+  </template>
+
 </body>
 </html>
