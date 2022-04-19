@@ -11,6 +11,7 @@
   border: none;
   padding: 0px;
   background-size: 32px 32px;
+  background-repeat: no-repeat;
 }
 
 .popup__close-button:hover {

@@ -12,7 +12,7 @@
 }
 
 .popup__input:invalid {
-  color: rgba(255, 0, 0, 0.6)
+  color: rgba(255, 0, 0, 0.6);
 }
 
 
