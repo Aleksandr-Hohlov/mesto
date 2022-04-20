@@ -22,15 +22,16 @@ const initialCards = [
 
 const popup = document.querySelector('.popup');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
-const closeButtonEditProfile = document.querySelector('.popup__close-button_edit-profile');
+const editProfileCloseButton = document.querySelector('.popup__close-button_edit-profile');
 const popupEditProfile = document.querySelector('#popup__edit-profile');
 const formElement = document.querySelector('.popup__container');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
 const addButton = document.querySelector('.profile__add-button');
 const popupNewPlace = document.querySelector('#popup__new-place');
-const closeButtonNewPlace = document.querySelector('.popup__close-button_new-place');
-const closeButtonPopupPreview = document.querySelector('.popup__close-button_preview');
+const formNewPlace = document.querySelector('.popup__form_new-place');
+const newPlaceCloseButton = document.querySelector('.popup__close-button_new-place');
+const popupPreviewCloseButton = document.querySelector('.popup__close-button_preview');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const placeInput = document.querySelector('.popup__input_type_name-place');
@@ -112,17 +113,6 @@ function closePopupPreview () {
   closePopup(popupPreviewImg);
 }
 
-/*Цикл массива
-initialCards.forEach(function (item) {
-  addCard (item)
-})*/
-
-
-
-
-
-
-
 /*Добавление карточек из массива*/
 initialCards.forEach(function (item) {
   render(createCard (item))
@@ -145,6 +135,7 @@ function createCard (item) {
   likeButtonCardPlace.addEventListener('click', handlerLikeButton);
   deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
   cardImgPreview.addEventListener('click', openPopupPreview);
+  /*cardImgPreview.addEventListener('click', () => openPopupPreview({ name, link }));*/
 
   nameCardPlace.textContent = item.name;
   imgCardPlace.src = item.link;
@@ -153,6 +144,7 @@ function createCard (item) {
   return cardPlace;
 }
 
+/*добавление на страницу карточки по Input*/
 function formSubmitNewPlace (e) {
   e.preventDefault();
   createCard (linkInput.value, placeInput.value)
@@ -177,12 +169,12 @@ function handlerDeleteButton (e) {
 
 /*addEventListener*/
 buttonEditProfile.addEventListener('click', openEditProfile);
-closeButtonEditProfile.addEventListener('click', closeEditProfile);
+editProfileCloseButton.addEventListener('click', closeEditProfile);
 formElement.addEventListener('submit', formSubmitHandler);
 addButton.addEventListener('click', openNewPlace);
-closeButtonNewPlace.addEventListener('click', closeNewPlace);
-closeButtonPopupPreview.addEventListener('click', closePopupPreview);
-popupNewPlace.addEventListener('submit', formSubmitNewPlace);
+newPlaceCloseButton.addEventListener('click', closeNewPlace);
+popupPreviewCloseButton.addEventListener('click', closePopupPreview);
+formNewPlace.addEventListener('submit', formSubmitNewPlace);
 likeButtonCardPlace.addEventListener('click', handlerLikeButton);
 deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
 cardImgPreview.addEventListener('click', openPopupPreview);

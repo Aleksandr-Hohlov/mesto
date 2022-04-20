@@ -50,7 +50,7 @@
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_new-place" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="popup__form_new-place">
+        <form class="popup__form popup__form_new-place" name="popup__form_new-place">
           <input class="popup__input popup__input_type_name-place" type="text" placeholder="Название" name="popup__input_name-place" minlength="3" required>
           <input class="popup__input popup__input_type_link-place" type="url" placeholder="Ссылка на картинку" name="popup__input_link-place" required>
           <button class="popup__save-button popup__save-button_new-place" type="submit">Создать</button>
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="popup" id="popup__preview-img">
+    <div class="popup popup__preview-img" id="popup__preview-img">
       <div class="popup__container-preview">
         <button class="popup__close-button popup__close-button_preview" type="button"></button>
         <img class="popup__preview" src="#" alt="фото">
