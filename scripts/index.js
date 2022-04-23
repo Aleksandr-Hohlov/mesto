@@ -1,26 +1,25 @@
 const initialCards = [
   {
-    name: 'Река Алибек',
-    link: 'https://i.postimg.cc/3x1kZVYJ/Alibek-River.jpg'
-  },{
     name: 'Гебиусские водопады',
     link: 'https://i.postimg.cc/MZRZZNc3/Gebius-Waterfalls.jpg'
-  },{
-    name: 'Скала Киселева',
-    link: 'https://i.postimg.cc/L63HLP3z/Kiselyov-rock.jpg'
-  },{
-    name: 'Домбай',
-    link: 'https://i.postimg.cc/MK6FvfPM/Dombaya-Mountains.jpg'
   },{
     name: 'Черное море',
     link: 'https://i.postimg.cc/VL8fJgnf/The-Black-Sea.jpg'
   },{
     name: 'Гора Ключевая',
     link: 'https://i.postimg.cc/mgdB6Gqk/Klychevay.jpg'
-  }
+  },{
+    name: 'Домбай',
+    link: 'https://i.postimg.cc/MK6FvfPM/Dombaya-Mountains.jpg'
+  },{
+    name: 'Скала Киселева',
+    link: 'https://i.postimg.cc/L63HLP3z/Kiselyov-rock.jpg'
+  },{
+    name: 'Река Алибек',
+    link: 'https://i.postimg.cc/3x1kZVYJ/Alibek-River.jpg'
+  },
 ];
 
-const popup = document.querySelector('.popup');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const editProfileCloseButton = document.querySelector('.popup__close-button_edit-profile');
 const popupEditProfile = document.querySelector('#popup__edit-profile');
@@ -46,7 +45,6 @@ const nameCardPlace = cardPlace.querySelector('.element__name');
 const imgCardPlace = cardPlace.querySelector('.element__image');
 const likeButtonCardPlace = cardPlace.querySelector('.element__like');
 const deleteButtonCardPlace = cardPlace.querySelector('.element__delete');
-const cardImgPreview = cardPlace.querySelector('.element__image');
 
 /*функция попап открытие*/
 function openPopup(popup) {
@@ -60,9 +58,9 @@ function closePopup(popup) {
 
 /*попап EditProfile функция Открытие попап на кнопку редактирования*/
 function openEditProfile () {
-  openPopup(popupEditProfile);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
+  openPopup(popupEditProfile);
   /*document.body.style.overflow = 'hidden';*/
 }
 
@@ -82,8 +80,7 @@ function formSubmitHandler (event) {
 
 /*попап NewPlace функция Открытие на кнопку addButton*/
 function openNewPlace () {
-  placeInput.value = '';
-  linkInput.value = '';
+  formNewPlace.reset()
   openPopup(popupNewPlace);
 }
 
@@ -94,18 +91,14 @@ function closeNewPlace () {
 
 /*попап popupPreviewImg функция Открытие*/
 function openPopupPreview (e) {
-  openPopup(popupPreviewImg);
   const cardPlace = e.target.closest('.element');
   const eventTargetText = cardPlace.querySelector('.element__name').textContent;
   const target = e.target;
-  const popupImage = cardPlace.querySelector('.element__image')
-  const popupImageName = document.querySelector('.popup__subtitle');
 
-  popupImage.src = target.src;
-  popupImage.alt = target.alt;
-  popupImageName.textContent = eventTargetText;
-  previewImg.setAttribute('src', popupImage.src);
-  previewImg.setAttribute('alt', eventTargetText);
+  popupSubtitle.textContent = eventTargetText;
+  previewImg.setAttribute('src', target.src);
+  previewImg.setAttribute('alt', target.alt);
+  openPopup(popupPreviewImg);
 }
 
 /*попап popupPreviewImg функция Закрытие на крестик*/
@@ -130,12 +123,10 @@ function createCard (item) {
   const imgCardPlace = cardPlace.querySelector('.element__image');
   const likeButtonCardPlace = cardPlace.querySelector('.element__like');
   const deleteButtonCardPlace = cardPlace.querySelector('.element__delete');
-  const cardImgPreview = cardPlace.querySelector('.element__image');
 
   likeButtonCardPlace.addEventListener('click', handlerLikeButton);
   deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
-  cardImgPreview.addEventListener('click', openPopupPreview);
-  /*cardImgPreview.addEventListener('click', () => openPopupPreview({ name, link }));*/
+  imgCardPlace.addEventListener('click', openPopupPreview);
 
   nameCardPlace.textContent = item.name;
   imgCardPlace.src = item.link;
@@ -177,5 +168,5 @@ popupPreviewCloseButton.addEventListener('click', closePopupPreview);
 formNewPlace.addEventListener('submit', formSubmitNewPlace);
 likeButtonCardPlace.addEventListener('click', handlerLikeButton);
 deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
-cardImgPreview.addEventListener('click', openPopupPreview);
+imgCardPlace.addEventListener('click', openPopupPreview);
 
