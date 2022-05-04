@@ -23,7 +23,7 @@ const initialCards = [
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const editProfileCloseButton = document.querySelector('.popup__close-button_edit-profile');
 const popupEditProfile = document.querySelector('#popup__edit-profile');
-const formElement = document.querySelector('.popup__container');
+const formElement2 = document.querySelector('.popup__container');
 const nameProfile = document.querySelector('.profile__title');
 const jobProfile = document.querySelector('.profile__subtitle');
 const addButton = document.querySelector('.profile__add-button');
@@ -45,6 +45,10 @@ const nameCardPlace = cardPlace.querySelector('.element__name');
 const imgCardPlace = cardPlace.querySelector('.element__image');
 const likeButtonCardPlace = cardPlace.querySelector('.element__like');
 const deleteButtonCardPlace = cardPlace.querySelector('.element__delete');
+
+
+
+
 
 /*функция попап открытие*/
 function openPopup(popup) {
@@ -135,14 +139,24 @@ function createCard (item) {
   return cardPlace;
 }
 
+
 /*добавление на страницу карточки по Input*/
 function formSubmitNewPlace (e) {
   e.preventDefault();
-  createCard (linkInput.value, placeInput.value)
+  /*const cardPlace = cardTemplate.querySelector('.element').cloneNode(true);
+  const nameCardPlace = cardPlace.querySelector('.element__name');
+  const imgCardPlace = cardPlace.querySelector('.element__image');
+  const likeButtonCardPlace = cardPlace.querySelector('.element__like');
+  const deleteButtonCardPlace = cardPlace.querySelector('.element__delete');*/
 
+  createCard (linkInput.value, placeInput.value);
   nameCardPlace.textContent = placeInput.value;
   imgCardPlace.src = linkInput.value;
   imgCardPlace.alt = placeInput.value;
+
+  /*likeButtonCardPlace.addEventListener('click', handlerLikeButton);
+  deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
+  imgCardPlace.addEventListener('click', openPopupPreview);*/
 
   render(cardPlace);
   closePopup(popupNewPlace);
@@ -158,10 +172,104 @@ function handlerDeleteButton (e) {
   e.target.closest('.element').remove();
 }
 
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_type_error');
+  errorElement.classList.remove('popup__input-error_active');
+  errorElement.textContent = '';
+};
+
+// Функция, которая проверяет валидность поля
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+// Функция, которая добавляет слушатели
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+    });
+  });
+};
+
+// Запуск валидации
+function enableValidation () {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+
+    setEventListeners(formElement);
+  });
+}
+
+enableValidation({
+  formElement: '.popup__form',
+  inputElement: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorElement: 'popup__input-error_active'
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*addEventListener*/
 buttonEditProfile.addEventListener('click', openEditProfile);
 editProfileCloseButton.addEventListener('click', closeEditProfile);
-formElement.addEventListener('submit', formSubmitHandler);
+formElement2.addEventListener('submit', formSubmitHandler);
 addButton.addEventListener('click', openNewPlace);
 newPlaceCloseButton.addEventListener('click', closeNewPlace);
 popupPreviewCloseButton.addEventListener('click', closePopupPreview);
