@@ -10,15 +10,8 @@
   opacity: 0;
 }
 
-.popup__input-error_active {
-  opacity: 100%;
-}
 
-.popup__input_type_error {
-  border-bottom: 1px solid red;
-}
 
-.popup__save-button_inactive {
-  opacity: 50%;
-}
+
+
 
