@@ -35,27 +35,31 @@
     </footer>
 
     <div class="popup" id="popup__edit-profile">
-      <div class="popup__container">
+      <fieldset class="popup__container">
         <button class="popup__close-button popup__close-button_edit-profile" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup__form_submit">
-          <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто" name="popup__input_name" minlength="3" required>
-          <input class="popup__input popup__input_type_job" type="text" value="Исследователь океана" name="popup__input_job" minlength="3" required>
+        <form class="popup__form" name="popup__form_submit" novalidate>
+          <input class="popup__input popup__input_type_name" id="name-input" type="text" value="Жак-Ив Кусто" name="popup__input_name" minlength="2" maxlength="40" required>
+          <span class="popup__input-error name-input-error">Вы пропустили это поле</span>
+          <input class="popup__input popup__input_type_job" id="job-input" type="text" value="Исследователь океана" name="popup__input_job" minlength="2" maxlength="200" required>
+          <span class="popup__input-error job-input-error">Вы пропустили это поле</span>
           <button class="popup__save-button popup__save-button_edit-profile" type="submit">Сохранить</button>
         </form>
-      </div>
+      </fieldset>
     </div>
 
     <div class="popup" id="popup__new-place">
-      <div class="popup__container">
+      <fieldset class="popup__container">
         <button class="popup__close-button popup__close-button_new-place" type="button"></button>
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form popup__form_new-place" name="popup__form_new-place">
-          <input class="popup__input popup__input_type_name-place" type="text" placeholder="Название" name="popup__input_name-place" minlength="3" required>
-          <input class="popup__input popup__input_type_link-place" type="url" placeholder="Ссылка на картинку" name="popup__input_link-place" required>
+        <form class="popup__form popup__form_new-place" name="popup__form_new-place" novalidate>
+          <input class="popup__input popup__input_type_error popup__input_type_name-place" id="place-input" type="text" placeholder="Название" name="popup__input_name-place" minlength="2" maxlength="30" required>
+          <span class="popup__input-error popup__input-error_active place-input-error">Вы пропустили это поле</span>
+          <input class="popup__input popup__input_type_error popup__input_type_link-place" id="link-input" type="url" placeholder="Ссылка на картинку" name="popup__input_link-place" required>
+          <span class="popup__input-error popup__input-error_active link-input-error">Введите адрес сайта</span>
           <button class="popup__save-button popup__save-button_new-place" type="submit">Создать</button>
         </form>
-      </div>
+      </fieldset>
     </div>
 
     <div class="popup popup_type_preview" id="popup__img">

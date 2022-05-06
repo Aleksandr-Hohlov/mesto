@@ -1,0 +1,24 @@
+.popup__input-error {
+  max-width: 358px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  position: absolute;
+  margin-top: -30px;
+  margin-left: 36px;
+  opacity: 0;
+}
+
+.popup__input-error_active {
+  opacity: 100%;
+}
+
+.popup__input_type_error {
+  border-bottom: 1px solid red;
+}
+
+.popup__save-button_inactive {
+  opacity: 50%;
+}
+

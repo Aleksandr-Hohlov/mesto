@@ -45,7 +45,8 @@ const nameCardPlace = cardPlace.querySelector('.element__name');
 const imgCardPlace = cardPlace.querySelector('.element__image');
 const likeButtonCardPlace = cardPlace.querySelector('.element__like');
 const deleteButtonCardPlace = cardPlace.querySelector('.element__delete');
-
+//const popupInput = popup.querySelectorAll('.popup__input')
+//const popupInputErorr = popup.querySelectorAll('.popup__input-error')
 
 
 
@@ -53,7 +54,9 @@ const deleteButtonCardPlace = cardPlace.querySelector('.element__delete');
 /*функция попап открытие*/
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  enableValidation()
 }
+
 
 /*функция попап закрытие*/
 function closePopup(popup) {
@@ -79,6 +82,7 @@ function formSubmitHandler (event) {
   event.preventDefault();
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
+
   closePopup(popupEditProfile);
 }
 
@@ -86,6 +90,7 @@ function formSubmitHandler (event) {
 function openNewPlace () {
   formNewPlace.reset()
   openPopup(popupNewPlace);
+
 }
 
 /*попап NewPlace функция Закрытие на крестик*/
@@ -153,10 +158,12 @@ function formSubmitNewPlace (e) {
   nameCardPlace.textContent = placeInput.value;
   imgCardPlace.src = linkInput.value;
   imgCardPlace.alt = placeInput.value;
+  const buttonNewPlace = document.querySelector('.popup__save-button_new-place');
 
   /*likeButtonCardPlace.addEventListener('click', handlerLikeButton);
   deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
   imgCardPlace.addEventListener('click', openPopupPreview);*/
+
 
   render(cardPlace);
   closePopup(popupNewPlace);
@@ -200,9 +207,14 @@ const checkInputValidity = (formElement, inputElement) => {
 // Функция, которая добавляет слушатели
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__save-button');
+  // чтобы проверить состояние кнопки в самом начале
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement);
+      // чтобы проверять его при изменении любого из полей
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
@@ -211,59 +223,44 @@ const setEventListeners = (formElement) => {
 function enableValidation () {
   const formList = Array.from(document.querySelectorAll('.popup__form'));
   formList.forEach((formElement) => {
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
-
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    const fieldsetList = Array.from(formElement.querySelectorAll('.popup__container'));
+    fieldsetList.forEach((fieldSet) => {
+      setEventListeners(fieldSet);
+    });
     setEventListeners(formElement);
   });
+}
+
+const hasInvalidInput = (inputList) => {
+  // проходим по этому массиву методом some
+  return inputList.some((inputElement) => {
+    // Если поле не валидно, колбэк вернёт true// Обход массива прекратится и вся функция// hasInvalidInput вернёт true
+    return !inputElement.validity.valid;
+
+  })
+};
+
+function toggleButtonState (inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__save-button_inactive');
+    buttonElement.setAttribute("disabled", "disabled");
+  } else {
+  buttonElement.classList.remove('popup__save-button_inactive');
+  buttonElement.removeAttribute("disabled", "disabled");
+  }
 }
 
 enableValidation({
   formElement: '.popup__form',
   inputElement: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
+  buttonElement: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorElement: 'popup__input-error_active'
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*addEventListener*/
@@ -278,3 +275,33 @@ likeButtonCardPlace.addEventListener('click', handlerLikeButton);
 deleteButtonCardPlace.addEventListener('click', handlerDeleteButton);
 imgCardPlace.addEventListener('click', openPopupPreview);
 
+/*Закрытие на оверлей*/
+popupNewPlace.addEventListener('click', (event) => {
+  const overlay = event.target
+  const qwe = event.target.key
+  console.log(qwe)
+  if (overlay.classList.contains('popup'))
+   {closePopup(popupNewPlace)}
+});
+
+popupEditProfile.addEventListener('click', (event) => {
+  const overlay = event.target
+  if (overlay.classList.contains('popup'))
+   {closePopup(popupEditProfile)}
+});
+
+popupPreviewImg.addEventListener('click', (event) => {
+  const overlay = event.target
+  if (overlay.classList.contains('popup'))
+   {closePopup(popupPreviewImg)}
+});
+
+/*Закрытие на Esc*/
+document.addEventListener('keydown', (event) => {
+  const keydown = event.key
+  if (keydown === "Escape") {
+    closePopup(popupNewPlace)
+    closePopup(popupEditProfile)
+    closePopup(popupPreviewImg)
+  }
+});
