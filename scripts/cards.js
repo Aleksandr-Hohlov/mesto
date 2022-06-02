@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
   {
     name: "Гебиусские водопады",
     link: "https://i.postimg.cc/MZRZZNc3/Gebius-Waterfalls.jpg",
