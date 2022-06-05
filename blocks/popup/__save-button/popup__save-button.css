@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.popup__save-button:hover {
+.popup__save-button:not([disabled]):hover {
   opacity: 0.8;
   transition: 0.3s;
   background: #000000;

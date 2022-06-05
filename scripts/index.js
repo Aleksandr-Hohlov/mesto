@@ -10,102 +10,87 @@ editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 //Закрытие на Esc
-function handlerEscButton(e) {
+function handleEscButton(e) {
+  //const popup = document.querySelector(".popup_opened");
   if (e.key === "Escape") {
-    closePopup(popupNewPlace);
-    closePopup(popupEditProfile);
-    closePopup(popupPreviewImg);
+    closePopup();
   }
 }
 
 //функция попап открытие
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handlerEscButton);
+  document.addEventListener("keydown", handleEscButton);
 }
 
 //функция попап закрытие
-function closePopup(popup) {
+export function closePopup() {
+  const popup = document.querySelector(".popup_opened");
   popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handlerEscButton);
+  document.removeEventListener("keydown", handleEscButton);
 }
 
 //попап EditProfile функция Открытие попап на кнопку редактирования
-function openEditProfile() {
+function openEditProfile(e) {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
+
   openPopup(popupEditProfile);
 }
 
-//попап EditProfile функция Закрытие на крестик
-function closeEditProfile() {
-  closePopup(popupEditProfile);
-}
-
 //попап EditProfile функция Сохранение изменений
-function formSubmitHandler(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
 
-  closePopup(popupEditProfile);
+  closePopup();
 }
 
 //попап NewPlace функция Открытие на кнопку addButton
 function openNewPlace() {
   formNewPlace.reset();
+  addCardFormValidator.validateButton();
+
   openPopup(popupNewPlace);
 }
 
-//попап NewPlace функция Закрытие на крестик
-function closeNewPlace() {
-  closePopup(popupNewPlace);
-}
-
-//добавление на страницу карточки по Input
-function formSubmitNewPlace(e) {
-  e.preventDefault();
-  const data = { name: placeInput.value, link: linkInput.value };
+const newCard = (data) => {
   const card = new Card(data, "#card-template");
   const cardElement = card.generateCard();
+  areaElements.prepend(cardElement);
+};
 
-  document.querySelector(".elements").prepend(cardElement);
-  closePopup(popupNewPlace);
+//добавление на страницу карточки по Input
+function handleAddCardFormSubmit(e) {
+  e.preventDefault();
+  newCard({
+    name: placeInput.value,
+    link: linkInput.value,
+  });
+
+  closePopup();
 }
+
+//Закрытие на оверлей
+const handleOverlayClose = (e) => {
+  if (e.target.classList.contains("popup")) {
+    closePopup();
+  }
+};
 
 //addEventListener
 buttonEditProfile.addEventListener("click", openEditProfile);
-editProfileCloseButton.addEventListener("click", closeEditProfile);
-formElement.addEventListener("submit", formSubmitHandler);
+editProfileCloseButton.addEventListener("click", closePopup);
+formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 addButton.addEventListener("click", openNewPlace);
-newPlaceCloseButton.addEventListener("click", closeNewPlace);
-formNewPlace.addEventListener("submit", formSubmitNewPlace);
-
+newPlaceCloseButton.addEventListener("click", closePopup);
+formNewPlace.addEventListener("submit", handleAddCardFormSubmit);
 //Закрытие на оверлей
-popupNewPlace.addEventListener("click", (event) => {
-  if (event.target.classList.contains("popup")) {
-    closePopup(popupNewPlace);
-  }
-});
-
-popupEditProfile.addEventListener("click", (event) => {
-  if (event.target.classList.contains("popup")) {
-    closePopup(popupEditProfile);
-  }
-});
-
-popupPreviewImg.addEventListener("click", (event) => {
-  if (event.target.classList.contains("popup")) {
-    closePopup(popupPreviewImg);
-  }
-});
+popupNewPlace.addEventListener("click", handleOverlayClose);
+popupEditProfile.addEventListener("click", handleOverlayClose);
+popupPreviewImg.addEventListener("click", handleOverlayClose);
 
 initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item, "#card-template");
-  // Создаём карточку и возвращаем наружу
-  const cardElement = card.generateCard();
-
-  // Добавляем в DOM
-  document.querySelector(".elements").prepend(cardElement);
+  newCard(item);
 });

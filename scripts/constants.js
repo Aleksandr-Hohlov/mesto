@@ -3,7 +3,7 @@ const editProfileCloseButton = document.querySelector(
   ".popup__close-button_edit-profile"
 );
 const popupEditProfile = document.querySelector("#popup__edit-profile");
-const formElement = document.querySelector(".popup__container");
+const formEditProfile = document.querySelector(".popup__container");
 const nameProfile = document.querySelector(".profile__title");
 const jobProfile = document.querySelector(".profile__subtitle");
 const addButton = document.querySelector(".profile__add-button");
@@ -26,6 +26,7 @@ const popupSubtitle = document.querySelector(".popup__subtitle");
 
 const editForm = document.querySelector(".popup__form_edit-profile");
 const addCardForm = document.querySelector(".popup__form_new-place");
+//const cardTemplateSelector = "#card-template";
 
 const config = {
   formElement: ".popup__form",
