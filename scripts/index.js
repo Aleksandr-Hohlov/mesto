@@ -31,9 +31,8 @@ export function closePopup(popup) {
 
 //Закрытие на оверлей
 const handleOverlayClose = (e) => {
-  const popup = document.querySelector(".popup_opened");
-  if (e.target.classList.contains("popup")) {
-    closePopup(popup);
+  if (e.target) {
+    closePopup(e.target);
   }
 };
 
@@ -81,10 +80,6 @@ function addCardPrepend(data) {
 //добавление на страницу карточки по Input
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
-  newCard({
-    name: placeInput.value,
-    link: linkInput.value,
-  });
   addCardPrepend({
     name: placeInput.value,
     link: linkInput.value,
