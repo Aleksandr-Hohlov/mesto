@@ -38,6 +38,7 @@ export class Card {
   _handleOpenPopup() {
     previewImg.src = this._image;
     popupSubtitle.textContent = this._title;
+    previewImg.alt = this._title;
     openPopup(popupPreviewImg);
   }
 
@@ -60,8 +61,6 @@ export class Card {
       .addEventListener("click", () => {
         this._handleOpenPopup(); // откройте попап
       });
-
-    popupPreviewCloseButton.addEventListener("click", closePopup); // закройте попап);
 
     this._element
       .querySelector(".element__like")

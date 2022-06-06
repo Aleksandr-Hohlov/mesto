@@ -11,9 +11,9 @@ addCardFormValidator.enableValidation();
 
 //Закрытие на Esc
 function handleEscButton(e) {
-  //const popup = document.querySelector(".popup_opened");
+  const popup = document.querySelector(".popup_opened");
   if (e.key === "Escape") {
-    closePopup();
+    closePopup(popup);
   }
 }
 
@@ -24,11 +24,18 @@ export function openPopup(popup) {
 }
 
 //функция попап закрытие
-export function closePopup() {
-  const popup = document.querySelector(".popup_opened");
+export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", handleEscButton);
 }
+
+//Закрытие на оверлей
+const handleOverlayClose = (e) => {
+  const popup = document.querySelector(".popup_opened");
+  if (e.target.classList.contains("popup")) {
+    closePopup(popup);
+  }
+};
 
 //попап EditProfile функция Открытие попап на кнопку редактирования
 function openEditProfile(e) {
@@ -44,7 +51,7 @@ function handleProfileFormSubmit(event) {
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
 
-  closePopup();
+  closePopup(popupEditProfile);
 }
 
 //попап NewPlace функция Открытие на кнопку addButton
@@ -55,11 +62,21 @@ function openNewPlace() {
   openPopup(popupNewPlace);
 }
 
+//Создание новой карточки
 const newCard = (data) => {
   const card = new Card(data, "#card-template");
-  const cardElement = card.generateCard();
-  areaElements.prepend(cardElement);
+  return card.generateCard();
 };
+
+// Добавление карточек из массива
+initialCards.forEach((item) => {
+  addCardPrepend(item);
+});
+
+// Добавление карточки в начало
+function addCardPrepend(data) {
+  areaElements.prepend(newCard(data));
+}
 
 //добавление на страницу карточки по Input
 function handleAddCardFormSubmit(e) {
@@ -68,29 +85,34 @@ function handleAddCardFormSubmit(e) {
     name: placeInput.value,
     link: linkInput.value,
   });
-
-  closePopup();
+  addCardPrepend({
+    name: placeInput.value,
+    link: linkInput.value,
+  });
+  closePopup(popupNewPlace);
 }
-
-//Закрытие на оверлей
-const handleOverlayClose = (e) => {
-  if (e.target.classList.contains("popup")) {
-    closePopup();
-  }
-};
 
 //addEventListener
 buttonEditProfile.addEventListener("click", openEditProfile);
-editProfileCloseButton.addEventListener("click", closePopup);
+
+//Закрыть на крестик popupEditProfile
+editProfileCloseButton.addEventListener("click", () => {
+  closePopup(popupEditProfile);
+});
+//Закрыть на крестик popupNewPlace
+newPlaceCloseButton.addEventListener("click", () => {
+  closePopup(popupNewPlace);
+});
+//Закрыть на крестик popupPreviewImg
+popupPreviewCloseButton.addEventListener("click", () => {
+  closePopup(popupPreviewImg);
+});
+
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 addButton.addEventListener("click", openNewPlace);
-newPlaceCloseButton.addEventListener("click", closePopup);
 formNewPlace.addEventListener("submit", handleAddCardFormSubmit);
+
 //Закрытие на оверлей
 popupNewPlace.addEventListener("click", handleOverlayClose);
 popupEditProfile.addEventListener("click", handleOverlayClose);
 popupPreviewImg.addEventListener("click", handleOverlayClose);
-
-initialCards.forEach((item) => {
-  newCard(item);
-});
