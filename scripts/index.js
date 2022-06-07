@@ -11,8 +11,8 @@ addCardFormValidator.enableValidation();
 
 //Закрытие на Esc
 function handleEscButton(e) {
-  const popup = document.querySelector(".popup_opened");
   if (e.key === "Escape") {
+    const popup = document.querySelector(".popup_opened");
     closePopup(popup);
   }
 }
