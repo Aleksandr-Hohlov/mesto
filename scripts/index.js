@@ -31,7 +31,7 @@ export function closePopup(popup) {
 
 //Закрытие на оверлей
 const handleOverlayClose = (e) => {
-  if (e.target) {
+  if (e.target === e.currentTarget) {
     closePopup(e.target);
   }
 };
