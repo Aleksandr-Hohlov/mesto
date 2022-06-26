@@ -1,4 +1,4 @@
-![Ссылка на проект Mesto](./images/logo_b.jpg)
+![Ссылка на проект Mesto](./src/images/logo_b.jpg)
 ****
 **[Проект: Место](https://aleksandr-hohlov.github.io/mesto/)**
 ### Проектная работа №3.
