@@ -1,6 +1,36 @@
+import "../pages/index.css";
+
+import {
+  buttonEditProfile,
+  editProfileCloseButton,
+  popupEditProfile,
+  formEditProfile,
+  nameProfile,
+  jobProfile,
+  addButton,
+  popupNewPlace,
+  formNewPlace,
+  newPlaceCloseButton,
+  popupPreviewCloseButton,
+  nameInput,
+  jobInput,
+  placeInput,
+  linkInput,
+  areaElements,
+  popupPreviewImg,
+  previewImg,
+  editForm,
+  addCardForm,
+  config,
+} from "./constants.js";
+
+import { Section } from "./Section.js";
 import { initialCards } from "./cards.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { UserInfo } from "./UserInfo.js";
 
 //Валидация
 const editFormValidator = new FormValidator(config, editForm);
@@ -9,105 +39,91 @@ const addCardFormValidator = new FormValidator(config, addCardForm);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-//Закрытие на Esc
-function handleEscButton(e) {
-  if (e.key === "Escape") {
-    const popup = document.querySelector(".popup_opened");
-    closePopup(popup);
-  }
-}
+//Превью попап
+const popupPreview = new PopupWithImage("#popup__img");
+popupPreview.setEventListeners();
 
-//функция попап открытие
-export function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handleEscButton);
-}
-
-//функция попап закрытие
-export function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscButton);
-}
-
-//Закрытие на оверлей
-const handleOverlayClose = (e) => {
-  if (e.target === e.currentTarget) {
-    closePopup(e.target);
-  }
+//Создание карточки
+const createCard = (data) => {
+  const card = new Card(data, "#card-template", {
+    handleCardClick: () => {
+      popupPreview.open(data);
+    },
+  });
+  return card;
 };
 
-//попап EditProfile функция Открытие попап на кнопку редактирования
-function openEditProfile(e) {
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
+//Добавление карточки
+const cardsList = new Section(
+  {
+    data: initialCards,
+    renderer: (item) => {
+      const card = createCard(item);
+      const cardElement = card.generateCard();
+      cardsList.addItem(cardElement);
+    },
+  },
+  areaElements
+);
 
-  openPopup(popupEditProfile);
-}
+//попап NewPlace
+const popupNewPlaceForm = new PopupWithForm("#popup__new-place", {
+  submit: (data) => {
+    const card = createCard(data);
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement, "prepend");
+  },
+});
+
+//попап EditProfile
+const popupEditProfileForm = new PopupWithForm("#popup__edit-profile", {
+  submit: (data) => {
+    userInfo.setUserInfo(data);
+  },
+});
+
+popupNewPlaceForm.setEventListeners();
+popupEditProfileForm.setEventListeners();
 
 //попап EditProfile функция Сохранение изменений
 function handleProfileFormSubmit(event) {
   event.preventDefault();
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-
-  closePopup(popupEditProfile);
+  popupEditProfileForm.close();
 }
 
-//попап NewPlace функция Открытие на кнопку addButton
-function openNewPlace() {
-  formNewPlace.reset();
-  addCardFormValidator.validateButton();
+//попап EditProfile
+const userInfo = new UserInfo({ nameProfile, jobProfile });
 
-  openPopup(popupNewPlace);
-}
-
-//Создание новой карточки
-const newCard = (data) => {
-  const card = new Card(data, "#card-template");
-  return card.generateCard();
-};
-
-// Добавление карточек из массива
-initialCards.forEach((item) => {
-  addCardPrepend(item);
+//Открыть EditProfile
+buttonEditProfile.addEventListener("click", () => {
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.userName;
+  jobInput.value = userData.userAbout;
+  popupEditProfileForm.open();
 });
 
-// Добавление карточки в начало
-function addCardPrepend(data) {
-  areaElements.prepend(newCard(data));
-}
-
 //добавление на страницу карточки по Input
-function handleAddCardFormSubmit(e) {
+export function handleAddCardFormSubmit(e) {
   e.preventDefault();
-  addCardPrepend({
+  const card = createCard({
     name: placeInput.value,
     link: linkInput.value,
   });
-  closePopup(popupNewPlace);
+  const cardElement = card.generateCard();
+  cardsList.addItem(cardElement, "prepend");
+  popupNewPlaceForm.close();
 }
 
-//addEventListener
-buttonEditProfile.addEventListener("click", openEditProfile);
-
-//Закрыть на крестик popupEditProfile
-editProfileCloseButton.addEventListener("click", () => {
-  closePopup(popupEditProfile);
-});
-//Закрыть на крестик popupNewPlace
-newPlaceCloseButton.addEventListener("click", () => {
-  closePopup(popupNewPlace);
-});
-//Закрыть на крестик popupPreviewImg
-popupPreviewCloseButton.addEventListener("click", () => {
-  closePopup(popupPreviewImg);
+//Открыть NewPlace
+addButton.addEventListener("click", () => {
+  popupNewPlaceForm.open();
 });
 
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);
-addButton.addEventListener("click", openNewPlace);
+
 formNewPlace.addEventListener("submit", handleAddCardFormSubmit);
 
-//Закрытие на оверлей
-popupNewPlace.addEventListener("click", handleOverlayClose);
-popupEditProfile.addEventListener("click", handleOverlayClose);
-popupPreviewImg.addEventListener("click", handleOverlayClose);
+//Отрисовать карточки из массива
+cardsList.renderItems();

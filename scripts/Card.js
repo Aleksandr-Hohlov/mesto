@@ -1,11 +1,9 @@
-import { openPopup } from "./index.js";
-import { closePopup } from "./index.js";
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._title = data.name;
     this._image = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick.handleCardClick;
   }
 
   _getTemplate() {
@@ -34,14 +32,6 @@ export class Card {
     return this._element;
   }
 
-  //Открыть попап
-  _handleOpenPopup() {
-    previewImg.src = this._image;
-    popupSubtitle.textContent = this._title;
-    previewImg.alt = this._title;
-    openPopup(popupPreviewImg);
-  }
-
   //Кнопка лайк
   _handleLikeButton() {
     this._element
@@ -56,22 +46,23 @@ export class Card {
   }
 
   _setEventListeners() {
+    //открыть preview
     this._element
       .querySelector(".element__image")
       .addEventListener("click", () => {
-        this._handleOpenPopup(); // откройте попап
+        this._handleCardClick();
       });
-
+    // лайк актив
     this._element
       .querySelector(".element__like")
       .addEventListener("click", () => {
-        this._handleLikeButton(); // лайк актив
+        this._handleLikeButton();
       });
-
+    // delete карточки
     this._element
       .querySelector(".element__delete")
       .addEventListener("click", () => {
-        this._handleDeleteButton(); // delete
+        this._handleDeleteButton();
       });
   }
 }
