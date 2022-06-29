@@ -1,5 +1,3 @@
-import { nameInput, jobInput } from "../constants/constants.js";
-
 export class UserInfo {
   constructor(nameSelector, aboutSelector) {
     this._nameSelector = nameSelector;
@@ -9,7 +7,7 @@ export class UserInfo {
     this._userAbout = document.querySelector(this._aboutSelector);
   }
 
-  //getUserInfo - возвращает объект с данными пользователя
+  //getUserInfo - возвращает объект с данными пользователя со страницы
   getUserInfo() {
     const data = {
       userName: this._userName.textContent,
@@ -19,8 +17,8 @@ export class UserInfo {
   }
 
   //setUserInfo - принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo() {
-    this._userName.textContent = nameInput.value;
-    this._userAbout.textContent = jobInput.value;
+  setUserInfo(data) {
+    this._userName.textContent = data.name;
+    this._userAbout.textContent = data.job;
   }
 }
