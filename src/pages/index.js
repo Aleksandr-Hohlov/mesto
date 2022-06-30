@@ -59,10 +59,10 @@ const createCard = (data) => {
 const popupEditProfileForm = new PopupWithForm('#popup__edit-profile', handleProfileFormSubmit);
 
 //попап EditProfile функция Сохранение изменений
-function handleProfileFormSubmit() {
+function handleProfileFormSubmit(data) {
   userInfo.setUserInfo({
-    name: nameInput.value,
-    job: jobInput.value,
+    name: data['popup__input_name'],
+    job: data['popup__input_job'],
   });
   popupEditProfileForm.close();
 }
