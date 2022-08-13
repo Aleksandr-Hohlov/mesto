@@ -3,12 +3,8 @@ export class FormValidator {
     this._form = form;
     this._settings = settings;
 
-    this._inputList = Array.from(
-      this._form.querySelectorAll(this._settings.inputSelector)
-    );
-    this._buttonElement = this._form.querySelector(
-      this._settings.submitButtonSelector
-    );
+    this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
+    this._buttonElement = this._form.querySelector(this._settings.submitButtonSelector);
   }
 
   // Функция, которая добавляет класс с ошибкой
@@ -28,7 +24,7 @@ export class FormValidator {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(inputErrorClass);
     errorElement.classList.remove(ErrorClass);
-    errorElement.textContent = "";
+    errorElement.textContent = '';
   };
 
   _checkInputValidity = (inputElement) => {
@@ -52,10 +48,10 @@ export class FormValidator {
 
     if (this._hasInvalidInput()) {
       this._buttonElement.classList.add(inactiveButtonClass);
-      this._buttonElement.setAttribute("disabled", "disabled");
+      this._buttonElement.setAttribute('disabled', 'disabled');
     } else {
       this._buttonElement.classList.remove(inactiveButtonClass);
-      this._buttonElement.removeAttribute("disabled", "disabled");
+      this._buttonElement.removeAttribute('disabled', 'disabled');
     }
   }
 
@@ -64,7 +60,7 @@ export class FormValidator {
     this._toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         // чтобы проверять его при изменении любого из полей
         this._toggleButtonState();

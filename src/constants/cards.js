@@ -1,5 +1,5 @@
 export const initialCards = [
-  {
+  /*{
     name: "Гебиусские водопады",
     link: "https://i.postimg.cc/MZRZZNc3/Gebius-Waterfalls.jpg",
   },
@@ -22,5 +22,5 @@ export const initialCards = [
   {
     name: "Река Алибек",
     link: "https://i.postimg.cc/3x1kZVYJ/Alibek-River.jpg",
-  },
+  },*/
 ];
