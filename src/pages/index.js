@@ -39,7 +39,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
     cardsList.renderItems(cards.reverse());
-    console.log(cards);
   })
   .catch((err) => {
     console.log(err);
