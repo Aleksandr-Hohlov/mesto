@@ -7,8 +7,6 @@ import {
   avatarSelector,
   addButton,
   buttonEditAvatar,
-  //nameInput,
-  //jobInput,
   areaElements,
   editForm,
   addCardForm,
@@ -17,7 +15,6 @@ import {
 } from '../constants/constants.js';
 
 import { Section } from '../components/Section.js';
-import { initialCards } from '../constants/cards.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -40,6 +37,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
     cardsList.renderItems(cards.reverse());
+    console.log(cards);
   })
   .catch((err) => {
     console.log(err);
