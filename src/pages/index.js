@@ -37,7 +37,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData);
     cardsList.renderItems(cards.reverse());
-    console.log(cards);
   })
   .catch((err) => {
     console.log(err);
