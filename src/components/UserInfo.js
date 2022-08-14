@@ -16,6 +16,7 @@ export class UserInfo {
       about: this._userAbout.textContent,
       //avatar: this._userAvatar.src,
     };
+    console.log(data);
     return data;
   }
 
@@ -23,8 +24,12 @@ export class UserInfo {
   setUserInfo(data) {
     this._userName.textContent = data.name;
     this._userAbout.textContent = data.about;
-    this._userAvatar.src = data.avatar;
+    //this._userAvatar.src = data.avatar;
     this._id = data._id;
+  }
+
+  setUserAvatar(data) {
+    this._userAvatar.src = data.avatar;
   }
 
   getId() {

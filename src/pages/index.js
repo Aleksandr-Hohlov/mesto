@@ -7,8 +7,8 @@ import {
   avatarSelector,
   addButton,
   buttonEditAvatar,
-  nameInput,
-  jobInput,
+  //nameInput,
+  //jobInput,
   areaElements,
   editForm,
   addCardForm,
@@ -38,6 +38,7 @@ const api = new Api({
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
     cardsList.renderItems(cards.reverse());
   })
   .catch((err) => {
@@ -128,12 +129,12 @@ const popupEditProfileForm = new PopupWithForm('#popup__edit-profile', handlePro
 function handleProfileFormSubmit(data) {
   popupEditProfileForm.submitText('Сохранение...');
   api
-    .patchUserInfo(data['popup__input_name'], data['popup__input_job'])
+    .patchUserInfo(data.name, data.about)
     .then(() => {
       userInfo.setUserInfo({
-        name: data['popup__input_name'],
-        about: data['popup__input_job'],
-        //avatar: data['profile__avatar'],
+        name: data.name,
+        about: data.about,
+        //avatar: data.avatar,
       });
       popupEditProfileForm.close();
     })
@@ -153,7 +154,7 @@ function handleSubmitAvatarForm(data) {
   api
     .editAvatar(data['popup__input_avatar'])
     .then(() => {
-      userInfo.setUserInfo({
+      userInfo.setUserAvatar({
         avatar: data['popup__input_avatar'],
       });
       popupEditAvatarForm.close();
@@ -177,21 +178,22 @@ const cardsList = new Section((card) => {
 //Открыть EditProfile
 buttonEditProfile.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.about;
-  editFormValidator.enableValidation();
+  popupEditProfileForm.setInputValues(userData);
+  /*nameInput.value = userData.name;
+  jobInput.value = userData.about;*/
+  editFormValidator.resetValidation();
   popupEditProfileForm.open();
 });
 
 //Открыть EditAvatar
 buttonEditAvatar.addEventListener('click', () => {
-  //popupEditAvatarForm.validateButton();
+  avatarFormValidator.resetValidation();
   popupEditAvatarForm.open();
 });
 
 //Открыть NewPlace
 addButton.addEventListener('click', () => {
-  addCardFormValidator.validateButton();
+  addCardFormValidator.resetValidation();
   popupNewPlaceForm.open();
 });
 

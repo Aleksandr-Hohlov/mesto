@@ -55,7 +55,7 @@ export class Card {
     this._cardImage.alt = this._title;
     this._element.querySelector('.element__name').textContent = this._title;
     this._counterLikes.textContent = this._likes.length;
-    //this._restoreLikes(userId);
+    this._restoreLikes(userId);
 
     // Вернём элемент наружу
     return this._element;
@@ -89,7 +89,7 @@ export class Card {
         return element._id === userId;
       })
     ) {
-      this._toggleLike();
+      this._toggleLikeButton();
     }
   }
 

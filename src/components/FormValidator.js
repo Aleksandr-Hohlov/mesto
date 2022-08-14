@@ -10,7 +10,6 @@ export class FormValidator {
   // Функция, которая добавляет класс с ошибкой
   _showInputError = (inputElement, errorMessage) => {
     const { inputErrorClass, ErrorClass } = this._settings;
-
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
     errorElement.textContent = errorMessage;
@@ -70,6 +69,13 @@ export class FormValidator {
 
   enableValidation() {
     this._setEventListeners();
+  }
+
+  resetValidation() {
+    this._toggleButtonState(); //<== управляем кнопкой ==
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement); //<==очищаем ошибки ==
+    });
   }
 
   validateButton() {
