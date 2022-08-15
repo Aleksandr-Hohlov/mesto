@@ -149,10 +149,10 @@ const popupEditAvatarForm = new PopupWithForm('#popup__avatar', handleSubmitAvat
 function handleSubmitAvatarForm(data) {
   popupEditAvatarForm.submitText('Сохранение...');
   api
-    .editAvatar(data['popup__input_avatar'])
+    .editAvatar(data['avatar-input'])
     .then(() => {
       userInfo.setUserAvatar({
-        avatar: data['popup__input_avatar'],
+        avatar: data['avatar-input'],
       });
       popupEditAvatarForm.close();
     })
